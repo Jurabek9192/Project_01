@@ -1,19 +1,25 @@
--- 1. Total Sales
+-- Total Sales
+-- Обьщий объём продажа
 SELECT
     SUM(total_amount) AS total_sales
 FROM clean_retail_sales;
 
--- 2. Total orders
+-- Total orders
+-- Количества заказов
+
 SELECT
     COUNT(transaction_id) AS total_orders
 FROM clean_retail_sales;
 
--- 3. Avg Order Value (AOV)
+-- Average Order Value (AOV)
+-- Средный чек по заказу
+
 SELECT
     SUM(total_amount)/COUNT(transaction_id) AS avg_order_value
 FROM clean_retail_sales;
 
--- 4. Top Products by Revenue
+-- Top Products by Revenue
+-- Топ продукти по выручке
 
 SELECT
     product_category,
@@ -23,7 +29,9 @@ GROUP BY product_category
 ORDER BY total_revenue DESC
 LIMIT 10;
 
--- 5. Monthly Sales & MoM Growth
+-- Monthly Sales & MoM Growth
+-- Месячные продажи и рост по сравнению с предыдущим месяцем
+
 WITH monthly_sales AS (
     SELECT
         DATE_TRUNC('month', order_date ) AS month,
